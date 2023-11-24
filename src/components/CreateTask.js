@@ -13,7 +13,7 @@ export default class CreateTask extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     this.props.createTask(this.state.task);
-    this.setState({ task: '' });
+    this.setState({ task: "" });
   };
   render() {
     return (
@@ -25,7 +25,7 @@ export default class CreateTask extends Component {
           onChange={this.handleChange}
           autoFocus
         />
-        <button type="submit">Add</button>
+        <button clas="add" type="submit">Add</button>
       </form>
     );
   }
