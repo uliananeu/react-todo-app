@@ -1,31 +1,49 @@
-import React, { Component } from "react";
+import React, { ChangeEvent, Component, FormEvent } from "react";
 
-export default class TaskItem extends Component {
-  constructor(props) {
+interface TaskItemProps {
+  id: number;
+  taskItem: { task: string; isCompleted: boolean };
+  toggleTask: (taskId: number) => void;
+  deleteTask: (taskId: number) => void;
+  editTask: (taskId: number, updatedTask: string) => void;
+}
+
+interface TaskItemState {
+  task: string;
+  isEditing: boolean;
+}
+
+export default class TaskItem extends Component<TaskItemProps, TaskItemState> {
+  constructor(props: TaskItemProps) {
     super(props);
     this.state = {
-      task: this.props.taskItem.task,
+      task: props.taskItem.task,
       isEditing: false,
     };
   }
 
-  setEditingState = (isEditing) => {
-    this.setState({ isEditing: isEditing });
+  setEditingState = (isEditing: boolean) => {
+    this.setState({ isEditing });
   };
+
   toggleTask = () => {
     this.props.toggleTask(this.props.id);
   };
+
   deleteTask = () => {
     this.props.deleteTask(this.props.id);
   };
-  handleChange = (event) => {
+
+  handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     this.setState({ task: event.target.value });
   };
-  handleSubmit = (event) => {
+
+  handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     this.props.editTask(this.props.id, this.state.task);
     this.setState({ isEditing: false });
   };
+
   render() {
     return (
       <tr>
@@ -41,10 +59,18 @@ export default class TaskItem extends Component {
               </form>
             </td>
             <td>
-              <button className="save" onClick={this.handleSubmit} type="submit">
+              <button
+                className="save"
+                onClick={() => this.handleSubmit}
+                type="submit"
+              >
                 Save
               </button>
-              <button className="back" onClick={() => this.setEditingState(false)} type="button">
+              <button
+                className="back"
+                onClick={() => this.setEditingState(false)}
+                type="button"
+              >
                 Back
               </button>
             </td>
@@ -68,8 +94,15 @@ export default class TaskItem extends Component {
               </span>
             </td>
             <td>
-              <button className="edit" onClick={() => this.setEditingState(true)}>Edit</button>
-              <button className="delete" onClick={this.deleteTask}>Delete</button>
+              <button
+                className="edit"
+                onClick={() => this.setEditingState(true)}
+              >
+                Edit
+              </button>
+              <button className="delete" onClick={this.deleteTask}>
+                Delete
+              </button>
             </td>
           </>
         )}

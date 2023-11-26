@@ -1,7 +1,14 @@
 import React, { Component } from "react";
 import TaskItem from "./TaskItem";
 
-export default class TaskList extends Component {
+interface TaskListProps {
+  tasks: { task: string; isCompleted: boolean }[];
+  deleteTask: (taskId: number) => void;
+  editTask: (taskId: number, updatedTask: string) => void;
+  toggleTask: (taskId: number) => void;
+}
+
+export default class TaskList extends Component<TaskListProps> {
   render() {
     return (
       <table>
