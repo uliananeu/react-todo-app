@@ -1,5 +1,9 @@
 # Todo React App
 
+![](https://github.com/uliananeu/react-todo-app/blob/main/images/react-todo-app.png)
+
+## Description
+
 A simple Todo application built with React for managing tasks and to-do items.
 
 ## Features
@@ -22,3 +26,4 @@ A simple Todo application built with React for managing tasks and to-do items.
 ```bash
 git clone https://github.com/uliananeu/react-todo-app.git
 cd todo-react-app
+```
